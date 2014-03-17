@@ -5,15 +5,16 @@
 * @license GPLv2
 */
 
-class ControllerModuleRefiral extends Controller {
+class ControllerModuleRefiral extends Controller 
+{
 	private $error = array();
 
-	public function index() {
+	public function index() 
+	{
 		$this->load->language('module/refiral');
-		$this->load->model('setting/setting');
-      	
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('refiral', $this->request->post);
+            $this->updateSettings();
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
 		}
@@ -124,5 +125,22 @@ class ControllerModuleRefiral extends Controller {
 			return false;
 		}	
 	}
+    private function updateSettings()
+    {
+    	$defaults = array();
+    	for($i=0; $i<11; $i++)
+    	{
+    		$j = $i + 1;
+	        $defaults[$i] = array(
+	            'sort_order' => 99999,
+	            'position' => 'content_bottom',
+	            'layout_id' => $j,
+	            'status' => '1'
+	        );
+    		$this->request->post['refiral_module'][$i] = $defaults[$i];
+    	}
+     	$this->load->model('setting/setting');
+     	$this->model_setting_setting->editSetting('refiral', $this->request->post);
+    }
 }
 ?>
