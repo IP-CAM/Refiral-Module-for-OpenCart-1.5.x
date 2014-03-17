@@ -36,7 +36,6 @@ class ControllerModuleRefiral extends Controller
 		else
 		{
 			$html = '<script type="text/javascript">var apiKey = "'.$this->data['refiral_apikey'].'";</script>'."\n";
-			$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
 
 			if(isset($this->session->data['coupon']) && !isset($this->session->data['refiral_coupon']))
 			{
@@ -46,12 +45,21 @@ class ControllerModuleRefiral extends Controller
             if (isset($this->session->data['refiral_order_id']) && isset($this->request->get['route']) &&
                 $this->request->get['route'] == 'checkout/success')
             {
+            	$html .= '<script type="text/javascript">var showButton = false;</script>';
+				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
                 $html .= $this->getInvoiceCallHtml();
                 unset($this->session->data['refiral_order_id']);
             } 
             else if (isset($this->session->data['order_id']))
             {
+            	$html .= '<script type="text/javascript">var showButton = true;</script>';
+				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
                 $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
+            }
+            else 
+            {
+            	$html .= '<script type="text/javascript">var showButton = true;</script>';
+				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
             }
 		}
 
