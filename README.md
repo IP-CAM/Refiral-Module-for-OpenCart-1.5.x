@@ -1,50 +1,46 @@
-Refiral Module for OpenCart 1.5.1.x
-===
+<h1>Refiral Module for OpenCart 1.5.x</h1>
 
-Overview
-===
+<h2>Overview</h2>
 Launch your referral campaign virally.
 Boost your sales up to 3X with our new hybrid marketing channel. Run your personalized, easy to integrate fully automated referral program.
 
 
-GETTING STARTED
-===
+<h2>Getting Started</h2>
+<h3>Installation</h3>
+<ol>
+<li>Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the "admin" and "catalog" folders already there.</li>
+<li>Open this file - <pre>catalog/controller/checkout/success.php</pre> 
+and insert this line  <pre>$this->session->data['refiral_order_id'] = $this->session->data['order_id'];</pre>
 
-INSTALLATION
-===
-1. Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the 
-"admin" and "catalog" folders already there.
+after <pre>if (isset($this->session->data['order_id'])) {</pre>
 
+and before <pre>$this->cart->clear();</pre>
+It should look like 
+<pre>
+if (isset($this->session->data['order_id'])) {
+    $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
+	$this->cart->clear();
+    ...
+    ...
+</pre>
+</li>
 
-2. Open this file - "catalog/controller/checkout/success.php", and 
+<li>Once you have inserted the code, open admin panel and go to "Extensions"->"Modules".</li>
+<li>In the modules list, find "Refiral - Launch your referral campaign virally" and click on "Install".</li>
+<li>You have successfully installed Refiral module.</li>
+</ol>
 
-insert this line - $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
+<h3>Activating Campaign</h3>
+<ol>
+<li>After installation, click on "Edit" to edit the module settings.</li>
 
-after - if (isset($this->session->data['order_id'])) {
+<li>Add "Refiral API Key" (get it by signing up on Refiral.com) and select Enabled from "Enable Campaign" drop-down option.</li>
 
-and before - $this->cart->clear();
+<li>Now, in the bottom part click on "Add Module".</li>
 
-
-3. Once you have inserted the code, open admin panel and go to "Extensions"->"Modules".
-
-4. In the modules list, find "Refiral - Launch your referral campaign virally" and click on "Install".
-
-5. You have successfully installed Refiral module.
-
-
-
-Activating Campaign
-===
-1. After installation, click on "Edit" to edit the module settings.
-
-2. Add "Refiral API Key" (get it by signing up on Refiral.com) and select Enabled from "Enable Campaign" drop-down option.
-
-3. Now, in the bottom part click on "Add Module".
-
-4. Add module for all the layouts by clicking on "Add Module" again and again till you cover all of them and make sure all have status as "Enabled".
-
-
-
+<li>Add module for all the layouts by clicking on "Add Module" again and again till you cover all of them and make sure all have status as "Enabled".</li>
+</ol>
+<br/>
 Congratulations, you have successfully integrated Refiral with your store.
 
-Refiral | www.refiral.com
+<strong>Refiral | <a href="http://www.refiral.com" target="_blank">www.refiral.com</a></strong>
