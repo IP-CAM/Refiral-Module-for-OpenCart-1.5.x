@@ -33,12 +33,8 @@ if (isset($this->session->data['order_id'])) {
 <h3>Activating Campaign</h3>
 <ol>
 <li>After installation, click on "Edit" to edit the module settings.</li>
-
 <li>Add "Refiral API Key" (get it by signing up on Refiral.com) and select Enabled from "Enable Campaign" drop-down option.</li>
-
-<li>Now, in the bottom part click on "Add Module".</li>
-
-<li>Add module for all the layouts by clicking on "Add Module" again and again till you cover all of them and make sure all have status as "Enabled".</li>
+<li>Click on "Save" button.</li>
 </ol>
 <br/>
 Congratulations, you have successfully integrated Refiral with your store.
