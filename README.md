@@ -1,0 +1,50 @@
+Refiral Module for OpenCart 1.5.1.x
+===
+
+Overview
+===
+Launch your referral campaign virally.
+Boost your sales up to 3X with our new hybrid marketing channel. Run your personalized, easy to integrate fully automated referral program.
+
+
+GETTING STARTED
+===
+
+INSTALLATION
+===
+1. Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the 
+"admin" and "catalog" folders already there.
+
+
+2. Open this file - "catalog/controller/checkout/success.php", and 
+
+insert this line - $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
+
+after - if (isset($this->session->data['order_id'])) {
+
+and before - $this->cart->clear();
+
+
+3. Once you have inserted the code, open admin panel and go to "Extensions"->"Modules".
+
+4. In the modules list, find "Refiral - Launch your referral campaign virally" and click on "Install".
+
+5. You have successfully installed Refiral module.
+
+
+
+Activating Campaign
+===
+1. After installation, click on "Edit" to edit the module settings.
+
+2. Add "Refiral API Key" (get it by signing up on Refiral.com) and select Enabled from "Enable Campaign" drop-down option.
+
+3. Now, in the bottom part click on "Add Module".
+
+4. Add module for all the layouts by clicking on "Add Module" again and again till you cover all of them and make sure all have status as "Enabled".
+
+
+
+Congratulations, you have successfully integrated Refiral with your store.
+
+Refiral | www.refiral.com
