@@ -43,4 +43,4 @@ if (isset($this->session->data['order_id'])) {
 <br/>
 Congratulations, you have successfully integrated Refiral with your store.
 
-<strong>Refiral | <a href="http://www.refiral.com" target="_blank">www.refiral.com</a></strong>
+<strong><a href="http://www.refiral.com" target="_blank">Refiral.com</a></strong>
