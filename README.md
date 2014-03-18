@@ -7,24 +7,9 @@ Boost your sales up to 3X with our new hybrid marketing channel. Run your person
 
 <h2>Getting Started</h2>
 <h3>Installation</h3>
+<strong>vQmod should be installed already in order to use this module.</strong>
 <ol>
-<li>Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the "admin" and "catalog" folders already there.</li>
-<li>Open this file - <pre>catalog/controller/checkout/success.php</pre> 
-and insert this line  <pre>$this->session->data['refiral_order_id'] = $this->session->data['order_id'];</pre>
-
-after <pre>if (isset($this->session->data['order_id'])) {</pre>
-
-and before <pre>$this->cart->clear();</pre>
-It should look like 
-<pre>
-if (isset($this->session->data['order_id'])) {
-    $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
-	$this->cart->clear();
-    ...
-    ...
-</pre>
-</li>
-
+<li>Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the "admin", "catalog" and "vqmod" folders already there.</li>
 <li>Once you have inserted the code, open admin panel and go to "Extensions"->"Modules".</li>
 <li>In the modules list, find "Refiral - Launch your referral campaign virally" and click on "Install".</li>
 <li>You have successfully installed Refiral module.</li>
