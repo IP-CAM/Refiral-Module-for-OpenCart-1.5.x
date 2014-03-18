@@ -88,7 +88,7 @@ class ControllerModuleRefiral extends Controller
 		$order_name = $this->order['firstname'].' '.$this->order['lastname'];
 		$order_email = $this->order['email'];
 
-		return '<script type="text/javascript">invoiceRefiral("'.$order_total.'", "'.$order_subtotal.'", "'.$order_coupon.'", "'.$order_cart.'", "'.$order_name.'", "'.$order_email.'");</script>'."\n";
+		return '<script type="text/javascript">invoiceRefiral("'.$order_subtotal.'", "'.$order_total.'", "'.$order_coupon.'", "'.$order_cart.'", "'.$order_name.'", "'.$order_email.'");</script>'."\n";
 	}
 
 	// Get subtotal of the order
