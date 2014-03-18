@@ -7,7 +7,7 @@ Boost your sales up to 3X with our new hybrid marketing channel. Run your person
 
 <h2>Getting Started</h2>
 <h3>Installation</h3>
-<strong>vQmod should be installed already in order to use this module.</strong>
+<strong>vQmod should be installed already in order to use this module.</strong> Download - https://code.google.com/p/vqmod/
 <ol>
 <li>Upload the "admin" and "catalog" folders included here to your OpenCart installation, over the top of the "admin", "catalog" and "vqmod" folders already there.</li>
 <li>Once you have inserted the code, open admin panel and go to "Extensions"->"Modules".</li>
