@@ -1,0 +1,14 @@
+<modification>
+	<id>Refiral</id>
+	<version>1.0.0</version>
+	<vqmver>2.1</vqmver>
+	<author>Refiral</author>
+        <file name="catalog/controller/checkout/success.php">
+            <operation>
+                <search position="after"><![CDATA[if (isset($this->session->data['order_id'])) {]]></search>
+                <add><![CDATA[
+                $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
+                ]]></add>
+            </operation>
+        </file>        
+</modification>
