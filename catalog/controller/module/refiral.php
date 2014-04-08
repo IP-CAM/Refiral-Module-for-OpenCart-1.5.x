@@ -72,8 +72,8 @@ class ControllerModuleRefiral extends Controller
 		$this->order = $this->model_account_order->getOrder($this->session->data['refiral_order_id']); // get the order
 		$this->cartInfo = $this->getCartInfo(); // get subtotal and cart info
 
-		$order_total = round($this->order['total']); // get total amount
-		$order_subtotal = round($this->cartInfo['subtotal']);
+		$order_total = $this->order['total']; // get total amount
+		$order_subtotal = $this->cartInfo['subtotal']; // get subtotal
 
 		// Check if coupon code was applied
 		if (isset($this->session->data['refiral_coupon']))

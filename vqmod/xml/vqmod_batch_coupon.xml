@@ -1,0 +1,116 @@
+<modification>
+
+	<id>Batch Coupons</id>
+	<version>v151.2</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Qphoria</author>
+
+	<file name="admin/controller/sale/coupon.php">
+		<operation error="skip"><!-- v15x only -->
+            <search position="replace" offset="2"><![CDATA[
+			if ((utf8_strlen($this->request->post['code']) < 3) || (utf8_strlen($this->request->post['code']) > 10)) {
+            ]]></search>
+            <add><![CDATA[
+		//Q: Batch Coupon
+		$codes = explode("\n", $this->request->post['code']);
+		if (count($codes) === 0) {
+			$this->error['code'] = $this->language->get('error_code');
+		} else {
+			foreach($codes as $code) {
+				if ($code && ((utf8_strlen(trim($code)) < 3) || (utf8_strlen(trim($code)) > 10))) {
+					$this->error['code'] = $this->language->get('error_code');
+					break;
+				}
+			}
+		}
+		//
+            ]]></add>
+        </operation>
+		
+		<operation error="skip"><!-- v14x only -->
+            <search position="replace" offset="2"><![CDATA[
+			if ((strlen(utf8_decode($this->request->post['code'])) < 3) || (strlen(utf8_decode($this->request->post['code'])) > 10)) {
+            ]]></search>
+            <add><![CDATA[
+		//Q: Batch Coupon
+		$codes = explode("\n", $this->request->post['code']);
+		if (count($codes) === 0) {
+			$this->error['code'] = $this->language->get('error_code');
+		} else {
+			foreach($codes as $code) {
+				if ($code && ((strlen(utf8_decode(trim($code))) < 3) || (strlen(utf8_decode(trim($code))) > 10))) {
+					$this->error['code'] = $this->language->get('error_code');
+					break;
+				}
+			}
+		}
+		//
+            ]]></add>
+        </operation>
+		
+	</file>
+
+	<file name="admin/language/*/sale/coupon.php">
+        <operation>
+            <search position="before"><![CDATA[
+			?>
+            ]]></search>
+            <add trim="true"><![CDATA[
+//Q: Batch Coupon
+$_['entry_code']  	  = 'Code:<br /><span class="help">The code the customer enters to get the discount. Enter one code per line for batch coupons.</span>';
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file name="admin/model/sale/coupon.php">
+		<operation>
+            <search position="after"><![CDATA[
+			public function addCoupon($data) {
+            ]]></search>
+            <add trim="true"><![CDATA[
+		$coupon_name = $data['name'];
+		$codes = explode("\n", $data['code']);
+		foreach ($codes as $code) {
+			if (!$code) { continue; }
+			$data['code'] = trim($code);
+			$data['name'] = "$coupon_name (".$data['code'].")";
+            ]]></add>
+        </operation>
+		
+		<operation>
+            <search position="before" offset="1"><![CDATA[
+			public function editCoupon($coupon_id, $data) {
+            ]]></search>
+            <add trim="true"><![CDATA[
+		}
+            ]]></add>
+        </operation>
+        
+        <operation error="skip"><!-- v14x only -->
+            <search position="after"><![CDATA[
+			foreach ($data['coupon_description'] as $language_id => $value) {
+            ]]></search>
+            <add trim="true"><![CDATA[
+		$value['name'] = ($value['name'] .  " (".$data['code'].")");
+            ]]></add>
+        </operation>
+        
+        
+	</file>
+
+	<file name="admin/view/template/sale/coupon_form.tpl">
+		<operation>
+            <search position="replace"><![CDATA[
+			<input type="text" name="code" value="<?php echo $code; ?>" />
+            ]]></search>
+            <add trim="true"><![CDATA[
+			<?php if (strpos($action, 'update') === false) { ?>
+			<textarea name="code" cols="30" rows="5"><?php echo $code; ?></textarea>
+			<?php } else { ?>
+			<input type="text" name="code" value="<?php echo $code; ?>" />
+			<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+
+</modification>
