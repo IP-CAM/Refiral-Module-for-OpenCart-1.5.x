@@ -46,23 +46,22 @@ class ControllerModuleRefiral extends Controller
                 $this->request->get['route'] == 'checkout/success')
             {
             	$html .= '<script type="text/javascript">var showButton = false;</script>';
-				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
+				$html .= '<script type="text/javascript" src="//rfer.co/api/v1/js/all.js"></script>'."\n";
                 $html .= $this->getInvoiceCallHtml();
                 unset($this->session->data['refiral_order_id']);
             } 
             else if (isset($this->session->data['order_id']))
             {
             	$html .= '<script type="text/javascript">var showButton = true;</script>';
-				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
+				$html .= '<script type="text/javascript" src="//rfer.co/api/v1/js/all.js"></script>'."\n";
                 $this->session->data['refiral_order_id'] = $this->session->data['order_id'];
             }
             else 
             {
             	$html .= '<script type="text/javascript">var showButton = true;</script>';
-				$html .= '<script type="text/javascript" src="http://www.refiral.com/api/all.js"></script>'."\n";
+				$html .= '<script type="text/javascript" src="//rfer.co/api/v1/js/all.js"></script>'."\n";
             }
 		}
-
 		return $html;
 	}
 
@@ -82,13 +81,13 @@ class ControllerModuleRefiral extends Controller
 			unset($this->session->data['refiral_coupon']); 
 		}
 		else
-			$order_coupon = ''; // coupon code was not applied
+			$order_coupon = 'NO_COUPON'; // coupon code was not applied
 		
-		$order_cart = $this->cartInfo['productsinfo'];
+		$order_cart = serialize($this->cartInfo['productsinfo']);
 		$order_name = $this->order['firstname'].' '.$this->order['lastname'];
 		$order_email = $this->order['email'];
 
-		return '<script type="text/javascript">invoiceRefiral("'.$order_subtotal.'", "'.$order_total.'", "'.$order_coupon.'", "'.$order_cart.'", "'.$order_name.'", "'.$order_email.'");</script>'."\n";
+		return "<script type='text/javascript'>invoiceRefiral('$order_subtotal', '$order_total', '$order_coupon', '$order_cart', '$order_name', '$order_email');</script>"."\n";
 	}
 
 	// Get subtotal of the order
@@ -96,15 +95,14 @@ class ControllerModuleRefiral extends Controller
 	{
 		$this->products = $this->model_account_order->getOrderProducts($this->order['order_id']); // get all products
 		
-        $return = array('subtotal' => 0, 'productsinfo' => '');
+        $return = array('subtotal' => 0, 'productsinfo' => array());
         foreach ($this->products as $product)
         {
             $return['subtotal'] += $product['total'];
-            $return['productsinfo'] .= $product['product_id'].'-'.$product['quantity'].', ';
+            $return['productsinfo'][] = array('product_id' => $product['product_id'], 'price' => $product['total'], 'quantity' => $product['quantity'], 'title' => $product['name']);
         }
         return $return;
 	}
 
-	/** Helper functions end **/
 }
 ?>
